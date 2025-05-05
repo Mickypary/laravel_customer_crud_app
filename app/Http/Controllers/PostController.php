@@ -19,13 +19,37 @@ class PostController extends Controller
 
     function index()
     {
-        return view('post.index');
+        // return view('post.index');
+        // return redirect()->action([$this->create()]);
+        // return redirect()->action([PostController::class, 'create'], ['id' => 1]);
+        // return redirect()->away('https://google.com');
+        // return to_route('post.create');
+
+        // return response()->json([
+        //     'name' => 'John Doe',
+        //     'state' => 'CA',
+        // ]);
+
+        // return [
+        //     'name' => 'John Doe',
+        //     'state' => 'CA',
+        // ];
+
+        // return response()->download(public_path('uploads/common_room1.jpg'));
+        return response()->file(public_path('uploads/common_room1.jpg'));
     }
 
 
     function store(Request $request)
     {
         dd($request->all());
+    }
+
+    function create()
+    {
+
+        dd("This is create post");
+        // return redirect()->back();
     }
 }
 

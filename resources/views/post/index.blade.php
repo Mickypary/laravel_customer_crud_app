@@ -45,10 +45,10 @@
                 <br>
             @endcan --}}
 
-            @if (auth()->user()->can('update', $post))
+            {{-- @if (auth()->user()->can('update', $post))
                 <a href="{{ route('post.edit', $post->id) }}">{{ $post->name }}</a>
                 <br>
-            @endif
+            @endif --}}
         @endforeach
     </div>
 </body>
