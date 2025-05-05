@@ -9,17 +9,48 @@
 </head>
 
 <body>
-    <form action="{{ route('post.store') }}" method="POST">
+    {{-- <form action="{{ route('post.store') }}" method="POST">
         @csrf
         <div>
-            <input type="hidden" name="user_id" id="" value="1">
+            <input type="hidden" name="user_id" id="" value="2">
             <input type="text" name="title" placeholder="Title">
             <br>
             <textarea name="description" placeholder="Description"></textarea>
             <br>
             <button type="submit">Submit</button>
         </div>
-    </form>
+    </form> --}}
+
+    <div>
+        @foreach ($posts as $post)
+            {{-- @if ($post->user_id == Auth::user()->id)
+                <a href="{{ route('post.edit', $post->id) }}">{{ $post->name }}</a>
+                <br>
+            @endif --}}
+
+            {{-- @can('update', $post)
+                <a href="{{ route('post.edit', $post->id) }}">{{ $post->name }}</a>
+                <br>
+            @endcan --}}
+
+
+            {{-- @if (auth()->user()->id === $post->user_id)
+                <a href="{{ route('post.edit', $post->id) }}">{{ $post->name }}</a>
+                <br>
+            @endif --}}
+
+
+            {{-- @can('update', $post)
+                <a href="{{ route('post.edit', $post->id) }}">{{ $post->name }}</a>
+                <br>
+            @endcan --}}
+
+            @if (auth()->user()->can('update', $post))
+                <a href="{{ route('post.edit', $post->id) }}">{{ $post->name }}</a>
+                <br>
+            @endif
+        @endforeach
+    </div>
 </body>
 
 </html>

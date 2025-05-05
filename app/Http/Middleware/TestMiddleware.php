@@ -2,25 +2,20 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckRoleMiddleware
+class TestMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        $user = User::findOrFail($request->id);
-        if ($user->role === $role) {
-            return $next($request);
-        }
-
-        return abort(403);
+        dd('This is a test middleware');
+        return $next($request);
     }
 }
