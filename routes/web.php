@@ -7,8 +7,11 @@ use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,3 +66,62 @@ Route::post('send-mail', function (Request $request) {
 
     dd('Email sent');
 })->name('send.mail');
+
+
+
+// Components
+Route::get('components', function () {
+    return view('blade-component');
+});
+
+
+// Session
+Route::get('session', function (Request $request) {
+    // Store Session
+    // $request->session()->put('foo', ['php', 'laravel', 'vue']);
+    // request()->session()->put('foo', ['php', 'laravel', 'vue']);
+    // session()->put('foo', ['php', 'laravel', 'vue']);
+    // session(['cart' => 'Product 1']);
+    // session(['cart' => ['Product 1', 'Product 2']]);
+    // Session::put('phone', 'Samsung');
+
+    // Get Session
+    // $value = Session::get('phone');
+    $value = session('cart', 'This is default value incase the key does not exist');
+
+    // Delete session
+    // session()->forget('cart');
+    // Session::forget(['cart', 'phone', 'foo']);
+
+    // Or Flush
+    session()->flush();
+
+
+    return view('session', compact('value'));
+});
+
+// Route::get('cache', function () {
+//     // Cache::put('post', 'post title one ', $seconds = 5);
+//     // $value = Cache::get('post');
+//     // dd($value);
+//     // $users = User::all();
+
+//     // $users = Cache::rememberForever('users', function () {
+//     //     // return DB::table('users')->get();
+//     //     return User::all();
+//     // });
+
+//     // To get a one time cache and delete immediately
+//     // $users = Cache::pull('users');
+
+//     // $users = [];
+
+//     // To delete a cache
+//     // Cache::forget('users');
+
+//     // if (Cache::has('users')) {
+//     //     dd('Cache is not empty');
+//     // }
+
+//     return view('cache', compact('users'));
+// });

@@ -9,8 +9,9 @@
 </head>
 
 <body>
-    <h1>You got a new mail</h1>
-    <p style="color: blueviolet">{{ $mailBody }}</p>
+    @foreach ($users ?? [] as $user)
+        <p>{{ $user->name }}</p>
+    @endforeach
 </body>
 
 </html>
